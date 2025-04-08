@@ -490,39 +490,30 @@ class App():
     def draw_battle(self):
         pyxel.cls(0)  # Clear screen with black
         
-        # Simple background with two green sine waves and spiraling red dots
-        t = self.battle_counter * 0.8  # 4x the original animation speed
+        # Enhanced background with four green sine waves at increased speed
+        t = self.battle_counter * 2.5  # Increased animation speed by ~3x
         
-        # Draw two green sine waves with extreme horizontal compression
+        # Draw four green sine waves with different phases and extremely fast movement
         for x in range(180):
-            # First sine wave (light green) - 4x horizontal compression
-            wave1_y = int(25 + pyxel.sin(x * 2.0 + t) * 20)  # 4x horizontal frequency
+            # First light green sine wave
+            wave1_y = int(15 + pyxel.sin(x * 2.0 + t) * 10)
             if 0 <= wave1_y < 70:
                 pyxel.line(x, wave1_y, x, wave1_y, 11)  # Light green (color 11)
             
-            # Second sine wave (dark green) - 4x horizontal compression
-            wave2_y = int(40 + pyxel.sin(x * 2.0 + t + 3.14) * 20)  # 4x horizontal frequency
+            # Second light green sine wave (different phase and amplitude)
+            wave2_y = int(30 + pyxel.sin(x * 2.0 + t * 1.4 + 1.57) * 12)
             if 0 <= wave2_y < 70:
-                pyxel.line(x, wave2_y, x, wave2_y, 3)  # Dark green (color 3)
-        
-        # Draw spiraling red dots (with matching increased speed)
-        num_dots = 8
-        for i in range(num_dots):
-            # Calculate position in a spiral pattern (4x faster rotation)
-            angle = t + (i * 6.28 / num_dots)
-            radius = 15 + pyxel.sin(t * 0.5) * 5
+                pyxel.line(x, wave2_y, x, wave2_y, 11)  # Light green (color 11)
             
-            # First spiral center
-            dot_x = int(60 + radius * pyxel.cos(angle))
-            dot_y = int(30 + radius * pyxel.sin(angle))
-            if 0 <= dot_x < 180 and 0 <= dot_y < 70:
-                pyxel.pset(dot_x, dot_y, 8)  # Red (color 8)
-            
-            # Second spiral center
-            dot_x = int(120 + radius * pyxel.cos(angle + 3.14))
-            dot_y = int(30 + radius * pyxel.sin(angle + 3.14))
-            if 0 <= dot_x < 180 and 0 <= dot_y < 70:
-                pyxel.pset(dot_x, dot_y, 8)  # Red (color 8)
+            # First dark green sine wave
+            wave3_y = int(45 + pyxel.sin(x * 2.0 + t * 0.8 + 3.14) * 10)
+            if 0 <= wave3_y < 70:
+                pyxel.line(x, wave3_y, x, wave3_y, 3)  # Dark green (color 3)
+                
+            # Second dark green sine wave (different phase and speed)
+            wave4_y = int(60 + pyxel.sin(x * 2.0 + t * 1.2 + 4.71) * 8)
+            if 0 <= wave4_y < 70:
+                pyxel.line(x, wave4_y, x, wave4_y, 3)  # Dark green (color 3)
         
         # 敵表示
         # Enemy display
