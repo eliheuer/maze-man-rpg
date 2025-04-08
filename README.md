@@ -4,6 +4,10 @@ A Pyxel game by Eli & son. A fork of [MazeWalkGame](https://github.com/Hiekichi/
 
 ![Cover Art](maze-man-rpg-cover-art.png)
 
+![Screenshot 1](maze-man-rpg-screenshot-001.png)
+
+![Screenshot 2](maze-man-rpg-screenshot-002.png)
+
 ## Overview
 - A dot-eating maze game with JPRG style battles.
 - Game created for programming learning with children
