@@ -398,35 +398,22 @@ class App():
             if pyxel.btnp(pyxel.KEY_DOWN) or pyxel.btnp(self.GPAD[2]):
                 self.selected_option = (self.selected_option + 1) % len(self.battle_options)
             
-            # 決定
-            # Confirm selection
-            if pyxel.btnp(pyxel.KEY_Z) or pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A):
-                if self.battle_options[self.selected_option] == "ATTACK":
-                    # 攻撃選択
-                    # Attack selected
-                    damage = pyxel.rndi(3, 8)
-                    self.enemy_hp -= damage
-                    self.battle_text = f"YOU DID {damage} DAMAGE!"
-                    self.battle_step = 2
-                    self.battle_counter = 0
-                elif self.battle_options[self.selected_option] == "MAGIC":
-                    # 魔法選択
-                    # Magic selected
-                    damage = pyxel.rndi(5, 12)
-                    self.enemy_hp -= damage
-                    self.battle_text = f"MAGIC BLAST! {damage} DAMAGE!"
-                    self.battle_step = 2
-                    self.battle_counter = 0
-                elif self.battle_options[self.selected_option] == "RUN":
-                    # 逃げる選択
-                    # Run selected
-                    if pyxel.rndi(0, 10) > 3:
-                        self.battle_text = "GOT AWAY SAFELY!"
-                        self.battle_step = 4
-                    else:
-                        self.battle_text = "COULDN'T ESCAPE!"
-                        self.battle_step = 2
-                    self.battle_counter = 0
+            # 決定 - 様々なキーを追加
+            # Confirm selection - added multiple keys
+            if (pyxel.btnp(pyxel.KEY_Z) or 
+                pyxel.btnp(pyxel.KEY_SPACE) or 
+                pyxel.btnp(pyxel.KEY_RETURN) or 
+                pyxel.btnp(pyxel.KEY_X) or 
+                pyxel.btnp(pyxel.KEY_A) or 
+                pyxel.btnp(pyxel.KEY_S) or 
+                pyxel.btnp(pyxel.KEY_D) or 
+                pyxel.btnp(pyxel.KEY_Q) or 
+                pyxel.btnp(pyxel.KEY_W) or 
+                pyxel.btnp(pyxel.KEY_E) or 
+                pyxel.btnp(pyxel.GAMEPAD1_BUTTON_A)):
+                
+                # Execute the selected option
+                self._execute_battle_option()
         
         # 敵の行動
         # Enemy action
@@ -470,6 +457,36 @@ class App():
                     self.mons[0][0] = pyxel.rndi(0, 15) * 8
                     self.mons[0][1] = pyxel.rndi(0, 15) * 8
     
+    # 戦闘オプション実行の新しいヘルパーメソッド
+    # New helper method for executing battle options
+    def _execute_battle_option(self):
+        if self.battle_options[self.selected_option] == "ATTACK":
+            # 攻撃選択
+            # Attack selected
+            damage = pyxel.rndi(3, 8)
+            self.enemy_hp -= damage
+            self.battle_text = f"YOU DID {damage} DAMAGE!"
+            self.battle_step = 2
+            self.battle_counter = 0
+        elif self.battle_options[self.selected_option] == "MAGIC":
+            # 魔法選択
+            # Magic selected
+            damage = pyxel.rndi(5, 12)
+            self.enemy_hp -= damage
+            self.battle_text = f"MAGIC BLAST! {damage} DAMAGE!"
+            self.battle_step = 2
+            self.battle_counter = 0
+        elif self.battle_options[self.selected_option] == "RUN":
+            # 逃げる選択
+            # Run selected
+            if pyxel.rndi(0, 10) > 3:
+                self.battle_text = "GOT AWAY SAFELY!"
+                self.battle_step = 4
+            else:
+                self.battle_text = "COULDN'T ESCAPE!"
+                self.battle_step = 2
+            self.battle_counter = 0
+
     def draw_battle(self):
         pyxel.cls(0)  # Clear screen with black
         
