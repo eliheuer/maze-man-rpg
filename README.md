@@ -2,6 +2,8 @@
 
 A Pyxel game by Eli & son. A fork of [MazeWalkGame](https://github.com/Hiekichi/MazeWalkGame) by Hiekichi.
 
+**[▶ Play the game online with a keyboard and web browser!](https://kitao.github.io/pyxel/wasm/launcher/?run=eliheuer.maze-man-rpg.maze-man-ripg)**
+
 ![Cover Art](maze-man-rpg-cover-art.png)
 
 ![Screenshot 1](maze-man-rpg-screenshot-001.png)
