@@ -515,20 +515,21 @@ class App():
             if 0 <= wave4_y < 70:
                 pyxel.line(x, wave4_y, x, wave4_y, 3)  # Dark green (color 3)
         
-        # 敵表示
-        # Enemy display
+        # 敵表示 - 単一のゴーストにアニメーション付き
+        # Enemy display - Single ghost with animation
         if self.battle_step < 4 or self.enemy_hp > 0:
             enemy_x = 90
-            enemy_y = 16
-            enemy_scale = 3
+            enemy_y = 30
             
-            # 敵のアニメーション
-            # Enemy animation
-            bounce = abs(pyxel.sin(self.battle_counter * 0.1)) * 5
+            # Simple bounce animation
+            bounce = pyxel.sin(self.battle_counter * 0.1) * 3
             
-            # ゴーストの描画（大きく）
-            # Draw ghost (enlarged)
-            pyxel.blt(enemy_x - 12, enemy_y - 12 + bounce, 0, 0, 56, 8 * enemy_scale, 8 * enemy_scale, 0)
+            # Alternate between left and right facing ghost sprites
+            # Using the same sprites as in the regular game mode
+            sprite_x = 0 if (self.battle_counter // 15) % 2 == 0 else 8
+            
+            # Draw a single ghost at a reasonable size
+            pyxel.blt(enemy_x, enemy_y + bounce, 0, sprite_x, 56, 8, 8, 0)
         
         # UI背景
         # UI background - clean black background
