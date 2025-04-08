@@ -483,7 +483,7 @@ class App():
         # Enemy display
         if self.battle_step < 4 or self.enemy_hp > 0:
             enemy_x = 90
-            enemy_y = 20  # Moved up even more to create additional space
+            enemy_y = 16  # Moved up even higher
             enemy_scale = 3
             
             # 敵のアニメーション
@@ -494,27 +494,27 @@ class App():
             # Draw ghost (enlarged)
             pyxel.blt(enemy_x - 12, enemy_y - 12 + bounce, 0, 0, 56, 8 * enemy_scale, 8 * enemy_scale, 0)
         
-        # UI枠 - removed white border and increased height for more bottom margin
+        # UI枠 - increased height significantly to ensure plenty of bottom margin
         # UI background - no border, just black background
-        pyxel.rect(0, 76, 180, 64, 0)  # Increased height to 64 for more bottom margin
+        pyxel.rect(0, 70, 180, 80, 0)  # Increased height to 80 pixels, starting higher up
         
         # テキスト表示
-        # Text display
-        pyxel.text(10, 84, self.battle_text, 7)
+        # Text display - same position relative to UI
+        pyxel.text(10, 78, self.battle_text, 7)
         
         # HP表示
         # HP display
-        pyxel.text(10, 94, f"YOUR HP: {self.player_hp}", 11)
+        pyxel.text(10, 88, f"YOUR HP: {self.player_hp}", 11)
         if self.enemy_hp > 0:
-            pyxel.text(100, 94, f"GHOST HP: {self.enemy_hp}", 8)
+            pyxel.text(100, 88, f"GHOST HP: {self.enemy_hp}", 8)
         
         # 選択肢表示
-        # Options display - kept same positions
+        # Options display - same spacing
         if self.battle_step == 1:
             for i, option in enumerate(self.battle_options):
                 color = 10 if i == self.selected_option else 7
-                pyxel.text(10, 104 + i * 8, option, color)
+                pyxel.text(10, 98 + i * 8, option, color)
                 if i == self.selected_option:
-                    pyxel.text(5, 104 + i * 8, ">", 10)
+                    pyxel.text(5, 98 + i * 8, ">", 10)
 
 App()
