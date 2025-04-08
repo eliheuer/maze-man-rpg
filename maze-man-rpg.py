@@ -250,14 +250,14 @@ class App():
         pyxel.bltm(0,0,0,0,0,128,128)
         ### ハイスコアとスコアを表示
         # Display high score and score
-        pyxel.text(138, 8,"Hi-Score",13)
-        pyxel.text(138,16,"{}".format(self.high_score).rjust(8),7)
-        pyxel.text(138,28,"   Score",13)
-        pyxel.text(138,36,"{}".format(self.score).rjust(8),7)
+        pyxel.text(143, 8,"Hi-Score",13)  # Adjusted for 204 width
+        pyxel.text(143,16,"{}".format(self.high_score).rjust(8),7)
+        pyxel.text(143,28,"   Score",13)  # Adjusted for 204 width
+        pyxel.text(143,36,"{}".format(self.score).rjust(8),7)
         # 敵キャラ紹介
         # Enemy character introduction
-        pyxel.text(138, 54,"BUNNY",13)
-        pyxel.blt(162,60,0,0,56,8,8,0)
+        pyxel.text(139, 54,"    BUNNY",13)  # Moved 4px left from previous position
+        pyxel.blt(167,60,0,0,56,8,8,0)  # Moved 4px left from previous position
         ### 敵キャラを描画
         # Draw enemy characters
         for i,m in enumerate(self.mons):
