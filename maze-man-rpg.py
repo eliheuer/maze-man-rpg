@@ -471,19 +471,47 @@ class App():
                     self.mons[0][1] = pyxel.rndi(0, 15) * 8
     
     def draw_battle(self):
-        pyxel.cls(0)
+        pyxel.cls(0)  # Clear screen with black
         
-        # バトル背景
-        # Battle background
-        for y in range(16):
-            col = 5 if y % 2 == 0 else 1
-            pyxel.rect(0, y * 8, 180, 8, col)
+        # Simple background with two green sine waves and spiraling red dots
+        t = self.battle_counter * 0.8  # 4x the original animation speed
+        
+        # Draw two green sine waves with extreme horizontal compression
+        for x in range(180):
+            # First sine wave (light green) - 4x horizontal compression
+            wave1_y = int(25 + pyxel.sin(x * 2.0 + t) * 20)  # 4x horizontal frequency
+            if 0 <= wave1_y < 70:
+                pyxel.line(x, wave1_y, x, wave1_y, 11)  # Light green (color 11)
+            
+            # Second sine wave (dark green) - 4x horizontal compression
+            wave2_y = int(40 + pyxel.sin(x * 2.0 + t + 3.14) * 20)  # 4x horizontal frequency
+            if 0 <= wave2_y < 70:
+                pyxel.line(x, wave2_y, x, wave2_y, 3)  # Dark green (color 3)
+        
+        # Draw spiraling red dots (with matching increased speed)
+        num_dots = 8
+        for i in range(num_dots):
+            # Calculate position in a spiral pattern (4x faster rotation)
+            angle = t + (i * 6.28 / num_dots)
+            radius = 15 + pyxel.sin(t * 0.5) * 5
+            
+            # First spiral center
+            dot_x = int(60 + radius * pyxel.cos(angle))
+            dot_y = int(30 + radius * pyxel.sin(angle))
+            if 0 <= dot_x < 180 and 0 <= dot_y < 70:
+                pyxel.pset(dot_x, dot_y, 8)  # Red (color 8)
+            
+            # Second spiral center
+            dot_x = int(120 + radius * pyxel.cos(angle + 3.14))
+            dot_y = int(30 + radius * pyxel.sin(angle + 3.14))
+            if 0 <= dot_x < 180 and 0 <= dot_y < 70:
+                pyxel.pset(dot_x, dot_y, 8)  # Red (color 8)
         
         # 敵表示
         # Enemy display
         if self.battle_step < 4 or self.enemy_hp > 0:
             enemy_x = 90
-            enemy_y = 16  # Moved up even higher
+            enemy_y = 16
             enemy_scale = 3
             
             # 敵のアニメーション
@@ -494,12 +522,12 @@ class App():
             # Draw ghost (enlarged)
             pyxel.blt(enemy_x - 12, enemy_y - 12 + bounce, 0, 0, 56, 8 * enemy_scale, 8 * enemy_scale, 0)
         
-        # UI枠 - increased height significantly to ensure plenty of bottom margin
-        # UI background - no border, just black background
-        pyxel.rect(0, 70, 180, 80, 0)  # Increased height to 80 pixels, starting higher up
+        # UI背景
+        # UI background - clean black background
+        pyxel.rect(0, 70, 180, 80, 0)
         
         # テキスト表示
-        # Text display - same position relative to UI
+        # Text display
         pyxel.text(10, 78, self.battle_text, 7)
         
         # HP表示
@@ -509,7 +537,7 @@ class App():
             pyxel.text(100, 88, f"GHOST HP: {self.enemy_hp}", 8)
         
         # 選択肢表示
-        # Options display - same spacing
+        # Options display
         if self.battle_step == 1:
             for i, option in enumerate(self.battle_options):
                 color = 10 if i == self.selected_option else 7
