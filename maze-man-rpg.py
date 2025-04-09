@@ -42,22 +42,22 @@ class App():
 
     # This function sets up a new maze level
     def init_stage(self):
-        self.counter = 0  # Counts time (frames) in the game
+        self.counter = 0 # Counts time (frames) in the game
         if self.score > self.high_score:
-            self.high_score = self.score  # Update high score if you got a new best score
-        self.score = 0  # Reset score for the new level
-        self.my_pos = [8*8,8*12]  # Your starting position (x,y) on the screen
-        self.my_dir = 0  # Which way you're facing (0 = stopped)
-        self.mons = [[8*7,8*8]]  # Ghost positions [x,y]
-        self.mons_dir = [4]  # Which way ghosts are moving (4 = left)
-        self.mons_active = [True]  # If True, ghosts can move around
-        self.power_count = 0  # Power pellet timer - when > 0, you can eat ghosts!
-        self.power_add_count = 0  # Keeps track of how many ghosts you've eaten
-        self.power_add_SCORE = [100]  # Points for eating ghosts
-        self.power_add_pos = []  # Positions where you've eaten ghosts
-        self.eat_cnt = 0  # How many pellets you've eaten
-        self.is_clear = False  # True when you've cleared the level
-        self.init_tilemap()  # Set up the maze
+            self.high_score = self.score # Update high score if you got a new best score
+        self.score = 0 # Reset score for the new level
+        self.my_pos = [8*8,8*12] # Your starting position (x,y) on the screen
+        self.my_dir = 0 # Which way you're facing (0 = stopped)
+        self.mons = [[8*7,8*8]] # Ghost positions [x,y]
+        self.mons_dir = [4] # Which way ghosts are moving (4 = left)
+        self.mons_active = [True] # If True, ghosts can move around
+        self.power_count = 0 # Power pellet timer - when > 0, you can eat ghosts!
+        self.power_add_count = 0 # Keeps track of how many ghosts you've eaten
+        self.power_add_SCORE = [100] # Points for eating ghosts
+        self.power_add_pos = [] # Positions where you've eaten ghosts
+        self.eat_cnt = 0 # How many pellets you've eaten
+        self.is_clear = False # True when you've cleared the level
+        self.init_tilemap() # Set up the maze
 
     def init_tilemap(self):
         # This function resets the dots in the maze
